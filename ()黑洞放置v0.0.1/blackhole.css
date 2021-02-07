@@ -1,0 +1,70 @@
+:root {
+--font: Courier;
+}
+
+* {
+	user-select: none;
+	margin: 0;
+	padding: 0;
+	font-family: var(--font);
+}
+
+*:focus {
+	outline: none;
+}
+
+*:not(span) *:not(div) *:not(label) {
+	color: var(--plaintxt);
+}
+body {
+background-color: rgb(100,100,100)
+}
+txt{
+padding: 20px;
+position:absolute;
+left:100px
+}
+title{
+padding: 20px;
+text-align: center
+}
+txt.mass{
+left:800px;
+top:80px
+}
+txt.proc{
+left:700px;
+top:150px
+}
+txt.dim0{
+left:700px;
+top:300px
+}
+txt.dim1{
+left:700px;
+top:400px
+}
+txt.dim2{
+left:700px;
+top:500px
+}
+txt.dim3{
+left:700px;
+top:600px
+}
+txt.dimmult0{
+left:200px;
+top:300px
+}
+txt.dimmult1{
+left:200px;
+top:400px
+}
+txt.dimmult2{
+left:200px;
+top:500px
+}
+txt.dimmult3{
+left:200px;
+top:600px
+}
