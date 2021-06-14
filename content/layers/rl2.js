@@ -16,6 +16,7 @@ function rl2reset(){
 }
 function getrl2exp(){
     var exp = player.mass.add(10).log10().log10().div(1.85).pow(0.4)
+    if(isincha("bc",14)) exp=exp.pow(0.5)
     if(exp.lte(1)) return one;
     return exp
 }

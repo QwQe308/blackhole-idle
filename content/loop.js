@@ -36,9 +36,12 @@ function gameloop(){
     showupg()
     showcha()
     showmaintab()
+    updatebc()
+
+    automation()
 
     //自动存档
-    savedelay=savedelay.sub(diff)
+    savedelay=savedelay.sub(realdelay)
     if(savedelay.lte(0)) localStorage.setItem("blackholesave", LZString.compressToBase64(JSON.stringify(player)));
 }
 function calctime(){
@@ -48,4 +51,12 @@ function calctime(){
     realdelay=(Number(t.getTime())-timestart)/1000
     timestart=t.getTime()
     //计算结束 真-输出是diff
+    if(isincha("bc",21)) diff=diff.div(2)
+}
+function updatebc(){
+    if(player.mass.gte(getbcreq())&&player.chanow.bc!=0){
+        if(player.chanow.bc>21) return;
+        player.chacomp.bc[player.chanow.bc]=true
+        exitcha(5)
+    }
 }

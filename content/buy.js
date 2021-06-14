@@ -22,6 +22,14 @@ function buymax(){
     }
 }
 
+function autobuydim(type,num){
+    var canbuy = player[tabinfo[type].baseres].div(player.dim[type][num].cost).logBase(player.dim[type][num].costinc).sub(player.dim[type][num].buynum).add(one).floor()
+    if(canbuy.gte(one)){
+    player.dim[type][num].buynum = player.dim[type][num].buynum.add(canbuy)
+    player.dim[type][num].num = player.dim[type][num].num.add(canbuy)
+    }
+}
+
 //rl3
 
 function getbucost(row1){
@@ -65,12 +73,11 @@ function resetupg(){
 function startcha(chatabnum,num){
     var chatab = tablist[chatabnum]
     if(chatab=="bc"){
-        if(player.chanow.bc!=[]) exitcha(tablist.indexOf("bc"))
         if(num<50){
             for(i=num;i>num-num%10;i--){
                 player.chaactive.bc.push(i)
             }
-            player.chanow.bc.push(num)
+            player.chanow.bc=num
             rl3reset(true);
             return;
         }
@@ -78,7 +85,7 @@ function startcha(chatabnum,num){
             for(i=num;i>=10;i-=10){
                 player.chaactive.bc.push(i)
             }
-            player.chanow.bc.push(num)
+            player.chanow.bc=num
             rl3reset(true);
             return;
         }
@@ -88,7 +95,7 @@ function startcha(chatabnum,num){
             }
         }
         player.chaactive.bc.push(61)
-        player.chanow.bc.push(61)
+        player.chanow.bc=61
         rl3reset(true);
         return;
     }
@@ -98,4 +105,7 @@ function exitcha(chatabnum){
     player.chanow[chatab]=[]
     player.chaactive[chatab]=[]
     rl3reset(true);
+}
+function isincha(type,num){
+    return player.chaactive[type].indexOf(num)+1
 }

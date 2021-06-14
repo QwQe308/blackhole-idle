@@ -34,6 +34,7 @@ var tabinfo={
         others(){return ""},
         unlreq(){return true},
         dimname:"引力发生器",
+        auto1(){return player.chacomp[type][num]},
         showrl1:true,
         showrl2:true
     },
@@ -131,7 +132,13 @@ var tabinfo={
             55:"meta-4",
             61:"meta-meta"
         },
-        11:""
+        11:"11:禁用11成就倍率.时间碎片效果^0.9. 奖励:物质零维自动化.注：自动化不消耗对应资源.",
+        12:"12:黑洞维度效率随维度等级减缓.(/10^等级). 奖励:物质一维自动化.",
+        13:"13:时间维度效率随维度等级减缓.(/1000^等级). 奖励:物质二维自动化.",
+        14:"14:rl1倍率^0.8.奖励:物质,三维,懂?",
+        15:"15:rl1和2指数^0.5.奖励:基于bp给予物质维度一个倍率.(bp^0.65/10+1)",
+        21:"21:时间速率/2,塌缩要求xe50.奖励:时间零维自动化.",
+        22:"22:咕咕咕 下次再更"
     }
 }
 function isable(type,num){
@@ -188,7 +195,7 @@ function showcha(){
 }
 function showcha2(num){
     var str = tabinfo[tabnow][num]
-    str+=`<button onclick=startcha(${tabnum},${num}) class=smalllongsquare></button>`
+    str+=`<button onclick=startcha(${tabnum},${num}) class=smalllongsquare>开始挑战</button>`
     document.getElementById("others").innerHTML=str
 }
 //fps显示
@@ -238,12 +245,12 @@ function tab(num){
                 if(tabinfo[tabnow].limit) if(tabinfo[tabnow].limit[i1]) if(i2>tabinfo[tabnow].limit[i1]) break;
                 if(tabinfo[tabnow].othername){
                     if(tabinfo[tabnow].othername[i1*10+i2]){
-                        showstr+=`<button id=cha${i1*10+i2} onclick=showcha2(${i1*10+i2}) class=${player.chaactive[tabnow].indexOf(i1*10+i2)+1 ?　(player.chanow[tabnow].indexOf(i1*10+i2)+1 ? "longsquaredoing" : "longsquareactive" ) : (player.chacomp[tabnow][i1*10+i2] ? "longsquarecompleted" : "longsquarenotcompleted")}>${tabinfo[tabnow].othername[i1*10+i2]}</button>`
+                        showstr+=`<button id=cha${i1*10+i2} onclick=showcha2(${i1*10+i2}) class=${player.chaactive[tabnow].indexOf(i1*10+i2)+1 ?　(player.chanow[tabnow]==i1*10+i2 ? "longsquaredoing" : "longsquareactive" ) : (player.chacomp[tabnow][i1*10+i2] ? "longsquarecompleted" : "longsquarenotcompleted")}>${tabinfo[tabnow].othername[i1*10+i2]}</button>`
                     }else{
-                        showstr+=`<button id=cha${i1*10+i2} onclick=showcha2(${i1*10+i2}) class=${player.chaactive[tabnow].indexOf(i1*10+i2)+1 ?　(player.chanow[tabnow].indexOf(i1*10+i2)+1 ? "longsquaredoing" : "longsquareactive" ) : (player.chacomp[tabnow][i1*10+i2] ? "longsquarecompleted" : "longsquarenotcompleted")}>C${i1+"-"+(i2-1)}</button>`
+                        showstr+=`<button id=cha${i1*10+i2} onclick=showcha2(${i1*10+i2}) class=${player.chaactive[tabnow].indexOf(i1*10+i2)+1 ?　(player.chanow[tabnow]==i1*10+i2 ? "longsquaredoing" : "longsquareactive" ) : (player.chacomp[tabnow][i1*10+i2] ? "longsquarecompleted" : "longsquarenotcompleted")}>C${i1+"-"+(i2-1)}</button>`
                     }
                 }
-                else{showstr+=`<button id=cha${i1*10+i2} onclick=showcha2(${i1*10+i2}) class=${player.chaactive[tabnow].indexOf(i1*10+i2)+1 ?　(player.chanow[tabnow].indexOf(i1*10+i2)+1 ? "longsquaredoing" : "longsquareactive" ) : (player.chacomp[tabnow][i1*10+i2] ? "longsquarecompleted" : "longsquarenotcompleted")}}>C${i1+"-"+(i2-1)}</button>`}
+                else{showstr+=`<button id=cha${i1*10+i2} onclick=showcha2(${i1*10+i2}) class=${player.chaactive[tabnow].indexOf(i1*10+i2)+1 ?　(player.chanow[tabnow]==i1*10+i2 ? "longsquaredoing" : "longsquareactive" ) : (player.chacomp[tabnow][i1*10+i2] ? "longsquarecompleted" : "longsquarenotcompleted")}}>C${i1+"-"+(i2-1)}</button>`}
             }
             showstr+=`<br />`
         }
@@ -259,7 +266,6 @@ function showsmallnum(num){
     return num.toExponential(3)
 }
 function maintab(num){
-
     var str = ""
     for(i=0;i<tabinfo["tab"+num].include.length;i+=2){
         if(num!=1) str+=`<button onclick=tab(${tabinfo["tab"+num].include[i+1]}) class=${tabinfo[tablist[tabinfo["tab"+num].include[i+1]]].unlreq() ? "longsquareunlocked" : "longsquarelocked" }>${tabinfo["tab"+num].include[i]}</button>`

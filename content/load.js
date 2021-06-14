@@ -1,7 +1,7 @@
 var player = {
     tabunl:[false,false,false,false],
         //版本
-        version : 0.23,
+        version : 0.24,
         devspeed:OmegaNum(1),
         //物质
         mass:OmegaNum(0),
@@ -30,7 +30,7 @@ var player = {
             return player.enegry.pow(exp).max(1)
         },
         chanow:{
-            bc:[]
+            bc:0
         },
         chaactive:{
             bc:[]
@@ -333,6 +333,7 @@ function load(data=""){
     }
 }fixsave()}
 function fixsave(){
+    if(save.version<0.24) player.chanow.bc=0
     if(save.version<0.22){
         player.bp = player.bp.div(5).floor()
         for(i=0;i<=3;i++){

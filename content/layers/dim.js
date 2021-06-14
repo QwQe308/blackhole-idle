@@ -17,14 +17,14 @@ var dimstat={
         rl1:true,
         rl2:true,
         enegry:true,
-        achmul(){return OmegaNum(1.5).pow(player.achlist.totalcompleted)},
+        achmul(){return isincha("bc",11) ? OmegaNum(1) : OmegaNum(1.5).pow(player.achlist.totalcompleted)},
         res:"mass",
         maxres(){return getmaxmass()}
     },
     td:{
         rl1:true,
         enegry:true,
-        achmul(){return OmegaNum(1.5).pow(player.achlist.totalcompleted)},
+        achmul(){return isincha("bc",11) ? OmegaNum(1) : OmegaNum(1.5).pow(player.achlist.totalcompleted)},
         res:"ts",
     },
     sd:{
@@ -32,6 +32,15 @@ var dimstat={
         achmul(){return 1},
     }
 }
+
+function gettsboost(num){
+    var mult = player.ts.pow(player.tsexp).add(OmegaNum(1)).root((num+1)**0.5)
+    mult=mult.pow(player.rl1exp)
+    //挑战debuff
+    if(isincha("bc",11)) mult=mult.pow(0.9)
+    return mult
+}
+
 //计算倍率
 function getdimmult(dimtype,num){
  
@@ -41,7 +50,7 @@ function getdimmult(dimtype,num){
     mult=mult.mul(getbuymult(dimtype,num).pow(getrealbought(dimtype,num)))
                 
     //时间碎片倍率
-    if(dimstat[dimtype].tsmul) mult=mult.mul(player.ts.pow(player.tsexp).pow(player.rl1exp).add(OmegaNum(1)).root((num+1)**0.5))
+    if(dimstat[dimtype].tsmul) mult=mult.mul(gettsboost(num))
 
     //rl1倍率
     if(dimstat[dimtype].rl1) mult=mult.mul(player.rl1mult)
@@ -50,7 +59,14 @@ function getdimmult(dimtype,num){
 
     if(dimstat[dimtype].enegry) mult=mult.mul(player.getenegryeff()) 
 
-    mult=mult.mul(dimstat[dimtype].achmul())
+    if(dimstat[dimtype].achmul) mult=mult.mul(dimstat[dimtype].achmul())
+
+    //挑战debuff
+    if(isincha("bc",12)) if(dimtype=="bd") mult=mult.mul(OmegaNum(0.1).pow(num))
+    if(isincha("bc",13)) if(dimtype=="td") mult=mult.mul(OmegaNum(0.001).pow(num))
+
+    //挑战奖励
+    if(player.chacomp.bc[15]) mult=mult.mul(player.bp.pow(0.65).mul(0.1).add(1))
                 
     return mult
                 

@@ -17,11 +17,14 @@ function rl1reset(){
 function getrl1mult(){
     var mult = player.mass.pow(player.rl1multexp)
     if(isbubought(25)) mult = mult.pow(1.05)
+    if(isincha("bc",14)) mult = mult.pow(0.8)
     return mult
 }
 function getrl1exp(){
-    var exp = player.mass.add(10).log10().log10().div(1.2).pow(0.25)
-    if(isbubought(25)) exp = player.mass.pow(1.05).add(10).log10().log10().div(1.2).pow(0.25)
+    var base = player.mass
+    if(isbubought(25)) base=base.pow(1.05)
+    var exp = base.add(10).log10().log10().div(1.2).pow(0.25)
+    if(isincha("bc",15)) exp=exp.pow(0.5)
     if(exp.lte(1)) return one;
     return exp
 }
