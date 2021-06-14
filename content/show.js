@@ -205,7 +205,7 @@ function showfps(){
 function tab(num){
     if(num==-10086){askforclear();return}
     if(num==-114514){prompt("存档：",LZString.compressToBase64(JSON.stringify(player)));return}
-    if(num==-1919810){load(JSON.parse(LZString.decompressFromBase64(prompt("输入存档："))));return}
+    if(num==-1919810){load(prompt("输入存档："));return}
     if(!tabinfo[tablist[num]].unlreq()) return;
     tabnow = tablist[num]
     tabnum = num
