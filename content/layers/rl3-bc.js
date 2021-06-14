@@ -11,7 +11,6 @@ function rl3reset(hardreset = false){
         player.dim.td[i].buynum=zero
         player.dim.td.proc[i]=one
         player.dim.sd[i].num=player.dim.sd[i].buynum
-        player.dim.sd[i].buynum=zero
         player.dim.sd.proc[i]=one
     }        
     if(isbubought(14)) player.dim.sd[0].num = one
