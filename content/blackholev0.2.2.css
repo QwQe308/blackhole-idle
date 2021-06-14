@@ -1,0 +1,103 @@
+:root {
+--font: Courier;
+}
+
+* {
+	user-select: none;
+	margin: 0;
+	padding: 0;
+	font-family: var(--font);
+}
+
+*:focus {
+	outline: none;
+}
+
+*:not(span) *:not(div) *:not(label) {
+	color: var(--plaintxt);
+}
+p{
+    text-align: center
+}
+button.normal{
+	height: 30px;
+	width: 300px;
+}
+.longsquare{
+	width: 100px;
+	height: 50px
+}
+.smalllongsquare{
+	width: 75px;
+	height: 25px
+}
+.smalllongsquarelocked{
+	color: red;
+	background-color: grey;
+	border-style: inset;
+	width: 75px;
+	height: 25px
+}
+.smalllongsquareunlocked{
+	color: black;
+	background-color: white;
+	border-style: outset;
+	width: 75px;
+	height: 25px
+}
+.normallocked{
+	color: red;
+	background-color: grey;
+	border-style: inset;
+	width: 75px;
+	height: 25px
+}
+.normalunlocked{
+	color: black;
+	background-color: white;
+	border-style: outset;
+	width: 300px;
+	height: 30px
+}
+.longsquarelocked{
+	color: red;
+	background-color: grey;
+	border-style: inset;
+	width: 100px;
+	height: 50px
+}
+.longsquareunlocked{
+	color: black;
+	background-color: white;
+	border-style: outset;
+	width: 100px;
+	height: 50px
+}
+.longsquarenotcompleted{
+	color: red;
+	background-color: grey;
+	border-style: outset;
+	width: 100px;
+	height: 50px
+}
+.longsquarecompleted{
+	color: black;
+	background-color: green;
+	border-style: outset;
+	width: 100px;
+	height: 50px
+}
+.longsquaredoing{
+	color: yellow;
+	background-color: red;
+	border-style: outset;
+	width: 100px;
+	height: 50px
+}
+.longsquareactive{
+	color: yellow;
+	background-color: orange;
+	border-style: outset;
+	width: 100px;
+	height: 50px
+}
