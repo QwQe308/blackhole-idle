@@ -8,8 +8,8 @@ var tabnum = 0
 var tabinfo={
     maintabs:4,
     tab1:{
-        name:"清档",
-        include:["清档",-10086],
+        name:"设置",
+        include:["清档",-10086,"导出",-114514,"导入",-1919810],
         unlreq(){return true},
     },
     tab2:{
@@ -196,6 +196,9 @@ function showfps(){
     document.getElementById("fps").innerHTML = "fps: "+showint(OmegaNum(1/realdelay))
 }
 function tab(num){
+    if(num==-10086){askforclear();return}
+    if(num==-114514){prompt("存档：",LZString.compressToBase64(JSON.stringify(player)));return}
+    if(num==-1919810){load(prompt("输入存档："));return}
     if(!tabinfo[tablist[num]].unlreq()) return;
     tabnow = tablist[num]
     tabnum = num
@@ -256,10 +259,11 @@ function showsmallnum(num){
     return num.toExponential(3)
 }
 function maintab(num){
-    if(num==1) askforclear()
+
     var str = ""
     for(i=0;i<tabinfo["tab"+num].include.length;i+=2){
-        str+=`<button onclick=tab(${tabinfo["tab"+num].include[i+1]}) class=${tabinfo[tablist[tabinfo["tab"+num].include[i+1]]].unlreq() ? "longsquareunlocked" : "longsquarelocked" }>${tabinfo["tab"+num].include[i]}</button>`
+        if(num!=1) str+=`<button onclick=tab(${tabinfo["tab"+num].include[i+1]}) class=${tabinfo[tablist[tabinfo["tab"+num].include[i+1]]].unlreq() ? "longsquareunlocked" : "longsquarelocked" }>${tabinfo["tab"+num].include[i]}</button>`
+        if(num==1) str+=`<button onclick=tab(${tabinfo["tab"+num].include[i+1]}) class="longsquareunlocked">${tabinfo["tab"+num].include[i]}</button>`
     }
     document.getElementById("tab").innerHTML=str
     maintabnow=num

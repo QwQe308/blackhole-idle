@@ -1,7 +1,7 @@
 var player = {
     tabunl:[false,false,false,false],
         //版本
-        version : 0.22,
+        version : 0.23,
         devspeed:OmegaNum(1),
         //物质
         mass:OmegaNum(0),
@@ -275,8 +275,9 @@ function askforclear(){
         }
     }
 }
-function load(){
-    save = JSON.parse(LZString.decompressFromBase64(localStorage.getItem("blackholesave")));
+function load(data=""){
+    if(!data) save = JSON.parse(LZString.decompressFromBase64(localStorage.getItem("blackholesave")));
+    if(data) save = JSON.parse(LZString.decompressFromBase64(data))
     if(save){
     if(save.tabunl) for(i=0;i<player.tabunl.length;i++){if(save.tabunl[i]) player.tabunl[i]=true}
     if(save.mass) player.mass=OmegaNum(save.mass)
@@ -347,13 +348,6 @@ function fixsave(){
         player.rl1exp=one
         player.rl1mult=one
         player.rl2exp = one
-    }
-    if(save.rl2exp.lt(1)) player.rl2exp = OmegaNum(1)
-    if(save.version=="0.0.3"){
-        save.bp=OmegaNum(0)
-    }
-    if(save.version=="0.0.2"){
-        save.rl2exp=OmegaNum(1)
     }
 }
 load()
